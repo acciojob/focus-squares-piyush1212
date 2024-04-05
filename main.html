@@ -42,22 +42,22 @@
     function highlightSquaresExcept(squareToExclude) {
         squares.forEach(square => {
             if (square !== squareToExclude) {
-                square.classList.add('highlight');
+                square.style.backgroundColor = "#6F4E37";
             }
         });
     }
 
-    // Function to remove highlight class from all squares
-    function removeHighlight() {
+    // Function to reset the background color of all squares
+    function resetSquares() {
         squares.forEach(square => {
-            square.classList.remove('highlight');
+            square.style.backgroundColor = "#E6E6FA";
         });
     }
 
     // Event listeners for mouse enter and leave for each square
     squares.forEach(square => {
         square.addEventListener('mouseenter', () => highlightSquaresExcept(square));
-        square.addEventListener('mouseleave', removeHighlight);
+        square.addEventListener('mouseleave', resetSquares);
     });
 </script>
 
