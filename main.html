@@ -20,7 +20,7 @@
 
     /* Additional class to highlight squares */
     .highlight {
-        background-color: #6F4E37; /* Coffee color */
+        background-color: #6F4E37 !important; /* Coffee color */
     }
 </style>
 </head>
@@ -35,42 +35,30 @@
 </div>
 
 <script>
-    // Get the squares by their IDs
-    const square1 = document.getElementById('square1');
-    const square2 = document.getElementById('square2');
-    const square3 = document.getElementById('square3');
+    // Get all squares
+    const squares = document.querySelectorAll('.square');
 
-    // Function to highlight other squares on hover
-    function highlightSquares() {
-        // Select all squares except the focused one
-        const squaresToHighlight = document.querySelectorAll('.square:not(.focus)');
-        
-        // Add highlight class to each square
-        squaresToHighlight.forEach(square => {
-            square.classList.add('highlight');
+    // Function to add highlight class to all squares except the focused one
+    function highlightSquaresExcept(squareToExclude) {
+        squares.forEach(square => {
+            if (square !== squareToExclude) {
+                square.classList.add('highlight');
+            }
         });
     }
 
-    // Function to remove highlight from squares
+    // Function to remove highlight class from all squares
     function removeHighlight() {
-        // Select all squares with highlight class
-        const highlightedSquares = document.querySelectorAll('.highlight');
-
-        // Remove highlight class from each square
-        highlightedSquares.forEach(square => {
+        squares.forEach(square => {
             square.classList.remove('highlight');
         });
     }
 
-    // Event listeners for mouse enter and leave
-    square1.addEventListener('mouseenter', highlightSquares);
-    square1.addEventListener('mouseleave', removeHighlight);
-
-    square2.addEventListener('mouseenter', highlightSquares);
-    square2.addEventListener('mouseleave', removeHighlight);
-
-    square3.addEventListener('mouseenter', highlightSquares);
-    square3.addEventListener('mouseleave', removeHighlight);
+    // Event listeners for mouse enter and leave for each square
+    squares.forEach(square => {
+        square.addEventListener('mouseenter', () => highlightSquaresExcept(square));
+        square.addEventListener('mouseleave', removeHighlight);
+    });
 </script>
 
 </body>
